@@ -1,0 +1,52 @@
+<html>
+<head>
+</head>
+<body>
+<script>
+
+const delayPromise = (ms) => new Promise(res=>setTimeout(_=>res(ms),ms))
+const logWithPrefix = (prefix)=>console.log.bind(console, '['+prefix+']');
+let xxLog = logWithPrefix('xx')
+
+const delayNtask = [
+    {delay:1000, task: xxLog},
+    {delay:800, task: xxLog},
+    {delay:600, task: xxLog},
+    {delay:400, task: xxLog},
+    {delay:200, task: xxLog}
+]
+
+const serialResolve = (promise, [f, task])=>{
+    return promise.then(reslt=>{
+        return f.then(r=>{task(r);return [...reslt, r]})
+    })
+}
+
+const serialStart = (promise, dt) => {
+    return promise.then(reslt=>{
+        return delayPromise(dt.delay)
+        .then(r=>{dt.task(r);return [...reslt, r]})
+    })
+}
+
+console.time('p')
+delayNtask
+    .map(dt=>[delayPromise(dt.delay), dt.task])
+    .reduce(serialResolve, Promise.resolve([]))
+    .then(rslt=> {
+        console.log(rslt)
+        console.timeEnd('p')
+    })
+
+console.time('p2')
+delayNtask
+    .reduce(serialStart, Promise.resolve([]))
+    .then(rslt=> {
+        console.log(rslt)
+        console.timeEnd('p2')
+    })
+ 
+
+</script>
+</body>
+</html>
