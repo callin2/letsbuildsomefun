@@ -8,8 +8,17 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="app"></div>
     <script>
-        
+        'use strict'
+        function Hello(props) {
+            return React.createElement('div', null, `Hello ${props.name}`)
+        }
+
+        ReactDOM.render(
+            React.createElement(Hello, {name: 'World'}, null),
+            document.getElementById('app')
+        ) 
     </script>   
 </body>
 </html>
