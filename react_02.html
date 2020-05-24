@@ -5,21 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    
     <title>Document</title>
 </head>
 <body>
-    <div id="app1"></div>
-    <div id="app2"></div>
-    <script>
-        'use strict'
-        function Hello(props) {
-            return React.createElement('div', null, `Hello ${props.name}`)
-        }
-
-        ReactDOM.render(
-            React.createElement(Hello, {name: 'World'}, null),
-            document.getElementById('app1')
-        ) 
-    </script>   
+    <div id="app"></div>
+    <script src="./dist/index.js"></script>
 </body>
 </html>
