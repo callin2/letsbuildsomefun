@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="painter" style="position: absolute; left: 200px; top: 50px; border: 1px solid red;"></div>
+<script>
+
+
+
+
+    function render(vnode, rootElement) {
+        if (typeof vnode==='string') return document.createTextNode(vnode);
+        let n = document.createElement(vnode.nodeName);
+        Object.keys(vnode.attributes || {}).forEach( k => n.setAttribute(k, vnode.attributes[k]) );
+        (vnode.children || []).forEach( c => n.appendChild(render(c)) );
+        return n;
+    }
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "day2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      [
+        "@babel/env",
+        {
+          "targets": {
+            "browsers": [
+              "Chrome >= 59",
+              "FireFox >= 44",
+              "Safari >= 7",
+              "Explorer 11",
+              "last 4 Edge versions"
+            ],
+            "esmodules": true
+          },
+          "corejs": "3.6.5",
+          "useBuiltIns": "usage"
+        }
+      ],
+      "react-app"
+    ]
+  }
+}

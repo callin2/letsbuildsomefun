@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Painter</title>
+</head>
+<body>
+<div id="painter" style="position: absolute; left: 200px; top: 50px; border: 1px solid red;">
+</div>
+<script>
+    // button component
+    function Button(color, handler) {
+        let el = document.createElement('button');
+        el.textContent = color;
+        el.style.backgroundColor = color;
+        el.addEventListener('click',handler);
+        return el;
+    }
+
+    // palette
+    function Palette() {
+        let el = document.createElement('div');
+        el.style.cssText = `
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        `
+        return el;
+    }
+
+    // canvas <- not real canvas
+    function CCanvas(handler) {
+        let el = document.createElement('div');
+        el.style.cssText = `
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            border: 1px solid black;
+            left: 100px;
+            top: 100px;
+            margin: 10px;
+            padding: 15px;
+        `
+        el.addEventListener('click',handler);
+        return el;
+    }
+
+    function Dot(color,cx,cy,r) {
+        let el = document.createElement('div')
+        el.style.cssText = `
+            border-radius: 9999px;
+            position: absolute;
+            left: ${cx-r}px;
+            top: ${cy-r}px;
+            width: ${r*2}px;
+            height: ${r*2}px;
+            border: 1px solid silver;
+            background-color: ${color};
+        `
+        return el;
+    }
+
+    // app
+    function App() {
+        let p = Palette()
+        let currentColor = 'red'
+
+        let redButton = Button('red', ()=>{
+            p.style.backgroundColor = 'red'
+            currentColor = 'red'
+            console.log("red clicked")
+        })
+        let blackButton = Button('green', ()=>{
+            p.style.backgroundColor = 'green'
+            currentColor = 'green'
+            console.log("green clicked")
+        })
+        let c = CCanvas((evt)=>{
+            console.log(evt)
+            let d = Dot(currentColor, evt.offsetX, evt.offsetY,10)
+            c.append(d);
+        })
+
+        let appRootElem = document.querySelector('#painter')
+
+        appRootElem.append(redButton)
+        appRootElem.append(blackButton)
+        appRootElem.append(p)
+        appRootElem.append(c)
+    }
+
+    App()
+
+</script>
+</body>
+</html>
