@@ -5,6 +5,5 @@ import tailwindConfig from './../../tailwind.config.js'
 
 const { theme } = resolveConfig(tailwindConfig)
 
-const Theme = props => <ThemeProvider {...props} {...{ theme }} />
+export const Theme = props => <ThemeProvider {...props} {...{ theme }} />
 
-export default Theme

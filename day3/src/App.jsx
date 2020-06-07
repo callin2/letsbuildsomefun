@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {default as styled} from 'twin.macro'
 import {Button} from "./component/button";
-import {Pane} from "./component/Pane";
+import {Pane} from "./component/pane";
 import {Window} from "./component/window";
 import {Toolbar} from "./component/toolbar";
-import Theme from "./style/theme";
+import {Theme} from "./style/theme";
 import {BrushIcon} from "./component/icon";
-import {Nav} from "./component/Nav";
+import {Nav} from "./component/nav";
 import {Draw} from "./component/draw";
 
 export function App(props) {
