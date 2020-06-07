@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Title </title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            display : flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn.red {
+            background : red;
+        }
+
+        .btn.green {
+            background : green;
+        }
+
+        .colorPalete{
+            width : 300px;
+            height : 30px;
+        }
+
+        .box {
+            width : 300px;
+            height : 300px;
+            border : 1px solid #999;
+            position: relative;
+        }
+
+        .point {
+            width : 10px;
+            height : 10px;
+            position: absolute;
+            border-radius: 999px;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div>
+        <button class="btn red"   onclick="clickBtn('red')"  >Red</button>
+        <button class="btn green" onclick="clickBtn('green')">Green</button>
+    </div>
+    <div class="colorPalete"></div>
+    <div class="box" onmousemove="move(event)" onmousedown="downCnavas();" onmouseup="upCnavas();"></div>
+    <div class="positionText"></div>
+
+    <script>
+        let colorPalete = document.querySelector('.colorPalete');
+        let box = document.querySelector('.box');
+        let positionText = document.querySelector('.positionText');
+        let idDraw = false;
+
+        // 컬러 변경
+        function clickBtn(color) {
+            colorPalete.style.background = color;
+        }
+
+        // 캔버스 마우스 다운
+        function downCnavas() {
+            idDraw = true;
+        }
+
+        // 캔버스 마우스 업
+        function upCnavas() {
+            idDraw = false;
+        }
+
+        // 캔버스 무브
+        function move(event) {
+            positionText.innerHTML = `${event.offsetX}, ${event.offsetY}`;
+            event.preventDefault();
+            if(idDraw) {
+                draw(event);
+            }
+            
+        }
+
+        // 실제 draw
+        function draw(event){
+            const x = event.offsetX;
+            const y = event.offsetY;
+            const color = colorPalete.style.background;
+
+            const d = document.createElement('div');
+            d.setAttribute('class', 'point');
+            d.style.cssText=`
+                left:${x}px;
+                top:${y}px;
+                background:${color};
+            `;
+            box.appendChild(d);
+        }
+    </script>
+</body>
+</html>
