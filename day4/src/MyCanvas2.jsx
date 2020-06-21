@@ -19,7 +19,6 @@ function drawPath2Canvas(ctx, path="m 0 0 l 10 10 a 6 6 0 1 0 1 1 l 19 19") {
 
 
 function drawLine2Canvas(ctx, line) {
-    // console.log('line', line)
     drawPath2Canvas(ctx, `M ${line.x1} ${line.y1} L ${line.x2} ${line.y2}`);
 }
 
@@ -57,17 +56,6 @@ export const MyCanvas2 = (props) => {
         let x = evt.nativeEvent.offsetX
         let y = evt.nativeEvent.offsetY
         setActiveDragInfo({x1:x ,y1:y , x2:x,y2:y})
-
-        // switch(props.activeDrawCtx.shape) {
-        //     case 'rect':
-        //         let x = evt.nativeEvent.offsetX
-        //         let y = evt.nativeEvent.offsetY
-        //         setActiveDragInfo({x1:x ,y1:y , x2:x,y2:y})
-        //         break;
-        //     default:
-        // }
-
-
     }
 
     let handleMouseUp = (evt) => {

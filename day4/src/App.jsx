@@ -39,8 +39,12 @@ export function App(props) {
                 </Toolbar>
             </Window.Header>
             <Window.Contents>
-                <Pane style={{borderRight:'1px solid gray'}}><MyCanvas /></Pane>
-                <Pane><MyCanvas2 activeDrawCtx={drawCtx}/></Pane>
+                <Pane style={{borderRight:'1px solid gray'}}><MyCanvas shapes={[
+                    {shape:'line', x1:100,y1:100, x2:200,y2:300},
+                    {shape:'line', x1:120,y1:100, x2:200,y2:300},
+                    {shape:'line', x1:130,y1:10, x2:200,y2:300},
+                ]}  activeDrawCtx={{shape:'line', color:'orange'}} /></Pane>
+                {/*<Pane><MyCanvas2 activeDrawCtx={drawCtx}/></Pane>*/}
             </Window.Contents>
             <Window.Footer>
                 Footer
