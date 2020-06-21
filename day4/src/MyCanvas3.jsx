@@ -19,24 +19,23 @@ function drawPath2Canvas(ctx, path="m 0 0 l 10 10 a 6 6 0 1 0 1 1 l 19 19") {
 
 
 function drawLine2Canvas(ctx, line) {
-    // console.log('line', line)
+    console.log('line', line)
     drawPath2Canvas(ctx, `M ${line.x1} ${line.y1} L ${line.x2} ${line.y2}`);
 }
-
 
 function drawCircle2Canvas(ctx, circle) {
     console.log('circle', circle)
     let path2 = new Path2D();
 
-    let r = Math.sqrt((circle.x1-circle.x2)^2 + (circle.y1-circle.y2)^2)
-
     path2.moveTo(circle.x1, circle.y1);
-    path2.arc(circle.x1, circle.y1, r, 0, 2 * Math.PI);
+    path2.arc(circle.x2, circle.y2, circle.r, 0, 2 * Math.PI);
 
     drawPath2Canvas(ctx, path2);
+
 }
 
-export const MyCanvas2 = (props) => {
+
+export const MyCanvas3 = (props) => {
     const canvasRef = useRef(null)
     let [activeDragInfo, setActiveDragInfo] = useState(null);
 
@@ -47,6 +46,27 @@ export const MyCanvas2 = (props) => {
         console.log(props.activeDrawCtx)
 
         if(props.activeDrawCtx.tool != 'shape') return;
+
+        switch(props.activeDrawCtx.shape) {
+            case 'rect':
+                drawRect2Canvas(ctx, {
+                    x: evt.nativeEvent.offsetX,
+                    y: evt.nativeEvent.offsetY,
+                    width: 100,
+                    height: 60,
+                    fillColor: 'orange',
+                    strokeColor:'black'})
+                break;
+
+            case 'path':
+                drawPath2Canvas(ctx, `m ${evt.nativeEvent.offsetX} ${evt.nativeEvent.offsetY} l 10 10 a 6 6 0 1 0 1 1 l 19 19`);
+                break;
+            case 'line':
+
+
+
+            default:
+        }
 
 
     }
@@ -87,24 +107,13 @@ export const MyCanvas2 = (props) => {
 
 
             case 'line':
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 drawLine2Canvas(ctx, activeDragInfo)
-                break;
-
-            case 'circle':
-                drawCircle2Canvas(ctx, activeDragInfo)
-                break;
 
             default:
         }
-
-        setActiveDragInfo(null);
     }
 
     let handleMouseMove = (evt) => {
-        const canvas = canvasRef.current
-        const ctx = canvas.getContext('2d')
-
         let x = evt.nativeEvent.offsetX
         let y = evt.nativeEvent.offsetY
 
@@ -112,13 +121,12 @@ export const MyCanvas2 = (props) => {
 
         setActiveDragInfo( Object.assign({},activeDragInfo,  {x2:x,y2:y}))
 
-        switch(props.activeDrawCtx.shape) {
-            case 'line':
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                drawLine2Canvas(ctx, activeDragInfo)
-                break;
-            default:
-        }
+        // switch(props.activeDrawCtx.shape) {
+        //     case 'rect':
+        //
+        //         break;
+        //     default:
+        // }
     }
 
     return (
