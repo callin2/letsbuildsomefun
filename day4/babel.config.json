@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "corejs": "3.6.5",
+        "useBuiltIns": "usage"
+      }
+    ],
+    "react-app"
+  ],
+  "plugins": [
+    "babel-plugin-macros",
+    "babel-plugin-styled-components",
+    "@babel/plugin-transform-react-jsx"
+  ]
+}

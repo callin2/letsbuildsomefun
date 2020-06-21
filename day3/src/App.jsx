@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {default as styled} from 'twin.macro'
 import {Button} from "./component/button";
 import {Pane} from "./component/pane";
 import {Window} from "./component/window";
